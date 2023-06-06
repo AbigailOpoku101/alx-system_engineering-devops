@@ -4,13 +4,15 @@ and prints a sorted count for a given subreddit. """
 
 
 import requests
+headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/piroli_)"}
+
 
 def count_words(subreddit, word_list):
-    headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/piroli_)"}
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = f"https://www.reddit.com/r/{}/hot.json?after={}"\
+          .format(subreddit, after)
 
     # Make the API request
-    response = requests.get(url, headers=headers)
+    request = requests.get(url, headers=headers, allow_redirects=False)
 
     # Check if the request was successful
     if response.status_code == 200:
