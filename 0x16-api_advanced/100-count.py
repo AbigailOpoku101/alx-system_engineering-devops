@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+""" Queries the Reddit API parses the title of hot art.
+and prints a sorted count for a given subreddit. """
+
+
 import requests
 
 def count_words(subreddit, word_list):
