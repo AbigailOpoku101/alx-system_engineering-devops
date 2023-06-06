@@ -8,8 +8,8 @@ headers = {"User-Agent": "ubuntu:hbtn:v1.0 (by /u/piroli_)"}
 
 
 def count_words(subreddit, word_list):
-    url = f"https://www.reddit.com/r/{}/hot.json?after={}"\
-          .format(subreddit, after)
+    url = "https://www.reddit.com/r/{}/hot.json?after={}"\
+          .format(subreddit, word_list)
 
     # Make the API request
     request = requests.get(url, headers=headers, allow_redirects=False)
@@ -44,7 +44,7 @@ def count_words(subreddit, word_list):
 
         # Print the sorted counts
         for word, count in sorted_counts:
-            print(f"{word}: {count}")
+            print("{word}: {count}")
     else:
         print("Error: Unable to retrieve data from the Reddit API")
 
@@ -54,7 +54,11 @@ def count_words(subreddit, word_list):
         count_words(subreddit, word_list[1:])
 
 
-# Example usage
-subreddit = "python"
-word_list = ["python", "java", "javascript"]
-count_words(subreddit, word_list)
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print("Usage: {} <subreddit> <list of keywords>".format(sys.argv[0]))
+        print("Ex: {} programming 'python java javascript'".format(sys.argv[0]))
+    else:
+        subreddit = sys.argv[1]
+        word_list = sys.argv[2].split()
+        count_words(subreddit, word_list)
